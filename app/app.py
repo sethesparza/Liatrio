@@ -1,10 +1,16 @@
-import requests 
-import json 
+from flask import Flask, jsonify, request 
 
-api_response = requests.get('app\data.json')
-print(api_response.status_code)
-data = api_response.text
-parse_json = json.loads(data)
+app = Flask(__name__)
 
-print("Todos:", parse_json)
+@app.route('/', methods = ['GET'])
+def ReturnJSON():
+    if (request.method == 'GET'):
+        data = {
+            "message": "Automate all the things!",
+            "timestamp": 1529729125
+        }
+        return jsonify(data)
 
+if __name__ == '__main__':
+    app.run(debug=True)
+    
