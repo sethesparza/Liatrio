@@ -1,10 +1,13 @@
-FROM python:3
+FROM python:3.8-alpine
+
+COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-COPY . . 
+COPY . /app
 
-CMD ["flask run", "app\app.py"]
+ENTRYPOINT [ "python" ]
+
+CMD ["app.py" ]
